@@ -1,0 +1,21 @@
+ #include <zephyr/dt-bindings/spi/spi.h>
+ #include <zephyr/dt-bindings/gpio/gpio.h>
+ #include <zephyr/dt-bindings/gpio/st-morpho-header.h>
+  
+ &spi1 {
+   cs-gpios = <&st_morpho_header ST_MORPHO_L_31 GPIO_ACTIVE_LOW>;
+ 
+   /* EEPROM on SPI1 using SW controlled CSn pin. */
+   eeprom_nucleo_my_shield: st_m95640_df@0 {
+     compatible = "atmel,at25";
+     reg = <0>;
+     size = <DT_SIZE_K(8)>;
+     pagesize = <32>;
+     address-width = <16>;
+     timeout = <5>;
+     wp-gpios = <&st_morpho_header ST_MORPHO_R_10 GPIO_ACTIVE_LOW>;
+     spi-max-frequency = <DT_FREQ_M(20)>;
+     duplex = <SPI_FULL_DUPLEX>;
+     frame-format = <SPI_FRAME_FORMAT_MOTOROLA>;
+   };
+ };

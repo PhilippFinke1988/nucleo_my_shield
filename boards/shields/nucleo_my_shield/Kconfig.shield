@@ -1,0 +1,2 @@
+config SHIELD_NUCLEO_MY_SHIELD
+  def_bool $(shields_list_contains,nucleo_my_shield)
